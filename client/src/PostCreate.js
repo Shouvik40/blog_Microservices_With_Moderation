@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PostList from "./PostList";
 
 const PostCreate = () => {
   const [title, setTitle] = useState("");
+  const [titleData, setTitleData] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
     await axios.post("http://localhost:4000/posts", {
       title,
     });
 
+    setTitleData(title);
     setTitle("");
   };
 
@@ -27,6 +29,9 @@ const PostCreate = () => {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
+      <hr />
+      <h1>Posts</h1>
+      <PostList titleData={titleData} />
     </div>
   );
 };
